@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Chat Test</title>
+        <style>
+            body { font-family: sans-serif; margin: 20px; }
+            #messages { border: 1px solid #ccc; height: 300px; overflow-y: scroll; padding: 5px; }
+            #input { margin-top: 10px; }
+        </style>
+    </head>
+    <body>
+        <h1>Chat Test</h1>
+        <div id="messages"></div>
+        <div id="input">
+            <input type="text" id="msg" placeholder="Type message..."/>
+            <button onclick="sendMessage()">Send</button>
+        </div>
+
+        <script>
+            const conversationId = 1;
+            const socket = new WebSocket(`ws://${window.location.host}/ws/chat/${conversationId}/`);
+
+            const messagesDiv = document.getElementById('messages');
+
+            socket.onmessage = function(e) {
+                const data = JSON.parse(e.data);
+                if (data.type === 'message') {
+                    addMessage(data.message.username + ': ' + data.message.message);
+                } else if (data.type === 'recent_messages') {
+                    data.messages.forEach(m => addMessage(m.username + ': ' + m.message));
+                }
+            };
+
+            function sendMessage() {
+                const msgInput = document.getElementById('msg');
+                const message = msgInput.value;
+                socket.send(JSON.stringify({ message: message }));
+                msgInput.value = '';
+            }
+
+            function addMessage(text) {
+                const p = document.createElement('p');
+                p.innerText = text;
+                messagesDiv.appendChild(p);
+                messagesDiv.scrollTop = messagesDiv.scrollHeight;
+            }
+        </script>
+    </body>
+</html>

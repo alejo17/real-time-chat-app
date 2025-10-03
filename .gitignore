@@ -1,0 +1,18 @@
+venv
+/venv
+.vscode/
+.env
+env
+env/
+
+# So Files
+.DS_Store
+
+### Django ###
+*.log
+*.pot
+*.pyc
+__pycache__/
+local_settings.py
+db.sqlite3
+media

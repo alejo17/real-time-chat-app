@@ -1,4 +1,4 @@
-Django + Redis Real-time Chat
+****Django + Redis Real-time Chat****
 
 This project is a real-time chat application built with Django, Django Channels, WebSockets, and Redis.
 Messages are stored in Redis, conversations and users in PostgreSQL.
@@ -6,6 +6,7 @@ It includes basic signup and login, throttling (rate limiting), and logging.
 
 
 ***Running with Docker***
+
     Prerequisites
     - Docker
     - Docker Compose
@@ -16,6 +17,7 @@ It includes basic signup and login, throttling (rate limiting), and logging.
     2. Access the app at http://localhost:8000/signup
 
 ***Running Locally with Virtualenv***
+
     Prerequisites
     - Python 3
     - Redis installed and running locally
@@ -36,4 +38,5 @@ It includes basic signup and login, throttling (rate limiting), and logging.
     7. Access the app at http://localhost:8000/signup
 
 ***Run tests***
+
     pytest -s
